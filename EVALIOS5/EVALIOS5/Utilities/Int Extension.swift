@@ -13,9 +13,9 @@ extension Int {
         return formattedNumber
     }
     
-    func formatCentsToEuros() -> String {
+    func formatCentsToEuros(currency: String) -> String {
         let euros = Double(self) / 100.0
-        let formattedString = String(format: "%.2f €", euros)
+        let formattedString = String(format: "%.2f \(currency)", euros)
         return formattedString
     }
 }

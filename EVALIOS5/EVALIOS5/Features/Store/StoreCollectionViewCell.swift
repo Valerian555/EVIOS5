@@ -26,20 +26,20 @@ class StoreCollectionViewCell: UICollectionViewCell {
             gameImage.loadImage(url: game.smallImage ?? "")
             gameDiscount.text = game.discountPercent?.formatDiscount()
             let attributedText = NSAttributedString(
-                string: game.originalPrice?.formatCentsToEuros() ?? "",
+                string: game.originalPrice?.formatCentsToEuros(currency: game.currency ?? "EUR") ?? "",
                 attributes: [NSAttributedString.Key.strikethroughStyle: NSUnderlineStyle.single.rawValue]
             )
             
             gameOriginalPrice.attributedText = attributedText
-            gameOriginalPrice.text = game.originalPrice?.formatCentsToEuros()
-            gameFinalPrice.text = game.finalPrice?.formatCentsToEuros()
+            gameOriginalPrice.text = game.originalPrice?.formatCentsToEuros(currency: game.currency ?? "EUR")
+            gameFinalPrice.text = game.finalPrice?.formatCentsToEuros(currency: game.currency ?? "EUR")
         } else {
             gameDiscount.isHidden = true
             gameOriginalPrice.isHidden = true
             
             gameName.text = game.name
             gameImage.loadImage(url: game.smallImage ?? "")
-            gameFinalPrice.text = game.finalPrice?.formatCentsToEuros()
+            gameFinalPrice.text = game.finalPrice?.formatCentsToEuros(currency: game.currency ?? "EUR")
         }
         
         if(game.finalPrice == 0) {

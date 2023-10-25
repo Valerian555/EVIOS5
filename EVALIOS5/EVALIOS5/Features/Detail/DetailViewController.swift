@@ -32,10 +32,6 @@ class DetailViewController: UIViewController {
         
         addToWishListButton.layer.cornerRadius = 5
         moreInfoButton.layer.cornerRadius = 5
-        
-        if(game?.controllerSupport ?? "" == "full") {
-            gameControllerImage.isHidden = false
-        }
 
     }
     
@@ -48,6 +44,9 @@ class DetailViewController: UIViewController {
     func setupView() {
         gameName.text = game?.name
         gameImage.loadImage(url: game?.largeImage ?? "")
+        if(game?.controllerSupport ?? "" == "full") {
+            gameControllerImage.isHidden = false
+        }
         setupPrice()
         setupAvailability()
     }
@@ -64,16 +63,16 @@ class DetailViewController: UIViewController {
     
     func setupPrice() {
         if(game?.discounted ?? false) {
-            finalprice.text = game?.finalPrice?.formatCentsToEuros()
+            finalprice.text = game?.finalPrice?.formatCentsToEuros(currency: game?.currency ?? "EUR")
             discount.text = game?.discountPercent?.formatDiscount()
             let attributedText = NSAttributedString(
-                string: game?.originalPrice?.formatCentsToEuros() ?? "",
+                string: game?.originalPrice?.formatCentsToEuros(currency: game?.currency ?? "EUR") ?? "",
                 attributes: [NSAttributedString.Key.strikethroughStyle: NSUnderlineStyle.single.rawValue]
             )
             
             originalPrice.attributedText = attributedText
         } else {
-            finalprice.text = game?.originalPrice?.formatCentsToEuros()
+            finalprice.text = game?.originalPrice?.formatCentsToEuros(currency: game?.currency ?? "EUR")
             discount.isHidden = true
             originalPrice.isHidden = true
         }

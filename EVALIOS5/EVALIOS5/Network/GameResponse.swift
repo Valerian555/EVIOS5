@@ -47,7 +47,7 @@ struct Game: Codable {
         case windowsAvailable = "windows_available"
         case macAvailable = "mac_available"
         case linuxAvailable = "linux_available"
-        case controllerSupport
+        case controllerSupport = "controller_support"
     }
 }
 
