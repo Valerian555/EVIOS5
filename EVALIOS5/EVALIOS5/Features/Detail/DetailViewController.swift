@@ -9,6 +9,7 @@ import UIKit
 import SafariServices
 
 class DetailViewController: UIViewController {
+    
     @IBOutlet weak var macView: UIView!
     @IBOutlet weak var linuxView: UIView!
     @IBOutlet weak var windowsView: UIView!
@@ -32,9 +33,57 @@ class DetailViewController: UIViewController {
         addToWishListButton.layer.cornerRadius = 5
         moreInfoButton.layer.cornerRadius = 5
         
+        if(game?.controllerSupport ?? "" == "full") {
+            gameControllerImage.isHidden = false
+        }
 
-
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        isInFavorite = DataManager.shared.isInFavorite(favoriteId: game?.id ?? 0)
+        setupWishlistButton(isInFavorite: isInFavorite)
+    }
+    
+    //MARK: Setup
+    func setupView() {
+        gameName.text = game?.name
+        gameImage.loadImage(url: game?.largeImage ?? "")
+        setupPrice()
+        setupAvailability()
+    }
+    
+    func setupWishlistButton(isInFavorite: Bool) {
+        if(isInFavorite) {
+            addToWishListButton.setTitle("Ajouté", for: .normal)
+            addToWishListButton.setImage(UIImage(systemName: "checkmark"), for: .normal)
+        } else {
+            addToWishListButton.setTitle("Ajouter à ma wishlist", for: .normal)
+            addToWishListButton.setImage(UIImage(systemName: "plus"), for: .normal)
+        }
+    }
+    
+    func setupPrice() {
+        if(game?.discounted ?? false) {
+            finalprice.text = game?.finalPrice?.formatCentsToEuros()
+            discount.text = game?.discountPercent?.formatDiscount()
+            let attributedText = NSAttributedString(
+                string: game?.originalPrice?.formatCentsToEuros() ?? "",
+                attributes: [NSAttributedString.Key.strikethroughStyle: NSUnderlineStyle.single.rawValue]
+            )
+            
+            originalPrice.attributedText = attributedText
+        } else {
+            finalprice.text = game?.originalPrice?.formatCentsToEuros()
+            discount.isHidden = true
+            originalPrice.isHidden = true
+        }
         
+        if(game?.finalPrice == 0) {
+            finalprice.text = "Free"
+        }
+    }
+    
+    func setupAvailability() {
         if let game = game {
             if game.linuxAvailable! {
                 linuxView.isHidden = false
@@ -54,57 +103,10 @@ class DetailViewController: UIViewController {
                 windowsView.isHidden = true
             }
         } else {
-            // Si le jeu n'est pas défini, masquez toutes les vues.
             linuxView.isHidden = true
             macView.isHidden = true
             windowsView.isHidden = true
         }
-        
-        if(game?.controllerSupport ?? "" == "full") {
-            gameControllerImage.isHidden = false
-        }
-
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        isInFavorite = DataManager.shared.isInFavorite(favoriteId: game?.id ?? 0)
-        setupWishlistButton(isInFavorite: isInFavorite)
-    }
-    
-    //MARK: Setup
-    func setupWishlistButton(isInFavorite: Bool) {
-        if(isInFavorite) {
-            addToWishListButton.setTitle("Ajouté", for: .normal)
-            addToWishListButton.setImage(UIImage(systemName: "checkmark"), for: .normal)
-        } else {
-            addToWishListButton.setTitle("Ajouter à ma wishlist", for: .normal)
-            addToWishListButton.setImage(UIImage(systemName: "plus"), for: .normal)
-        }
-    }
-    
-    func setupView() {
-        gameName.text = game?.name
-        gameImage.loadImage(url: game?.largeImage ?? "")
-        
-        if(game?.discounted ?? false) {
-            finalprice.text = game?.finalPrice?.formatCentsToEuros()
-            discount.text = game?.discountPercent?.formatDiscount()
-            let attributedText = NSAttributedString(
-                string: game?.originalPrice?.formatCentsToEuros() ?? "",
-                attributes: [NSAttributedString.Key.strikethroughStyle: NSUnderlineStyle.single.rawValue]
-            )
-            
-            originalPrice.attributedText = attributedText
-        } else {
-            finalprice.text = game?.originalPrice?.formatCentsToEuros()
-            discount.isHidden = true
-            originalPrice.isHidden = true
-        }
-        
-        if(game?.finalPrice == 0) {
-            finalprice.text = "Free"
-        }
-        
     }
     
     

@@ -84,6 +84,7 @@
 		F2C357052AE8F33C0049516E /* EVALIOS5 */ = {
 			isa = PBXGroup;
 			children = (
+				F2C357452AE935600049516E /* Utilities */,
 				F2C357302AE90D7A0049516E /* DB */,
 				F2C3571E2AE8F5700049516E /* Network */,
 				F2C3571A2AE8F4E10049516E /* Features */,
@@ -93,8 +94,6 @@
 				F2C3570F2AE8F33D0049516E /* Assets.xcassets */,
 				F2C357112AE8F33D0049516E /* LaunchScreen.storyboard */,
 				F2C357142AE8F33D0049516E /* Info.plist */,
-				F2C357262AE8FC600049516E /* ImageViewExtension.swift */,
-				F2C357282AE902750049516E /* Int Extension.swift */,
 			);
 			path = EVALIOS5;
 			sourceTree = "<group>";
@@ -154,6 +153,15 @@
 				F2C3573F2AE90E3E0049516E /* DataManager.swift */,
 			);
 			path = DB;
+			sourceTree = "<group>";
+		};
+		F2C357452AE935600049516E /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				F2C357282AE902750049516E /* Int Extension.swift */,
+				F2C357262AE8FC600049516E /* ImageViewExtension.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -8,7 +8,8 @@
 import UIKit
 
 class StoreCollectionViewCell: UICollectionViewCell {
-
+    
+    //MARK: - Properties
     @IBOutlet weak var gameFinalPrice: UILabel!
     @IBOutlet weak var gameOriginalPrice: UILabel!
     @IBOutlet weak var gameDiscount: UILabel!
@@ -18,6 +19,7 @@ class StoreCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
     }
     
+    //MARK: - Setup
     func setup(game: Game) {
         if(game.discounted!) {
             gameName.text = game.name

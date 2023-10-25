@@ -273,6 +273,7 @@
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="3z5-Yy-eSy"/>
+                                                    <constraint firstAttribute="width" secondItem="D3P-Vy-6Av" secondAttribute="height" multiplier="1:1" id="NF6-O8-5NZ"/>
                                                     <constraint firstItem="NHx-Wf-dTE" firstAttribute="top" secondItem="D3P-Vy-6Av" secondAttribute="top" constant="5" id="OfT-By-MVw"/>
                                                     <constraint firstAttribute="trailing" secondItem="NHx-Wf-dTE" secondAttribute="trailing" constant="5" id="RkB-C5-TZ7"/>
                                                     <constraint firstAttribute="bottom" secondItem="NHx-Wf-dTE" secondAttribute="bottom" constant="5" id="duH-lY-yRg"/>
@@ -292,6 +293,7 @@
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstAttribute="bottom" secondItem="uHD-Oc-UcU" secondAttribute="bottom" constant="5" id="AA6-00-Aew"/>
+                                                    <constraint firstAttribute="width" secondItem="aID-gs-h2E" secondAttribute="height" multiplier="1:1" id="FfY-t6-NK8"/>
                                                     <constraint firstItem="uHD-Oc-UcU" firstAttribute="top" secondItem="aID-gs-h2E" secondAttribute="top" constant="5" id="UdN-tV-zHq"/>
                                                     <constraint firstItem="uHD-Oc-UcU" firstAttribute="leading" secondItem="aID-gs-h2E" secondAttribute="leading" constant="5" id="cO0-Yk-1CJ"/>
                                                     <constraint firstAttribute="height" constant="50" id="iGo-bq-Lej"/>
@@ -300,10 +302,6 @@
                                                 </constraints>
                                             </view>
                                         </subviews>
-                                        <constraints>
-                                            <constraint firstItem="aID-gs-h2E" firstAttribute="width" secondItem="aID-gs-h2E" secondAttribute="height" multiplier="1:1" id="FfY-t6-NK8"/>
-                                            <constraint firstItem="D3P-Vy-6Av" firstAttribute="width" secondItem="D3P-Vy-6Av" secondAttribute="height" multiplier="1:1" id="NF6-O8-5NZ"/>
-                                        </constraints>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Input" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c9F-QU-0hj">
                                         <rect key="frame" x="127" y="90.333333333333314" width="39" height="20.333333333333329"/>
@@ -328,6 +326,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="30" id="V0f-Ge-zt3"/>
                                                     <constraint firstAttribute="width" secondItem="85O-yf-9y0" secondAttribute="height" multiplier="1:1" id="nuB-ht-bPt"/>
+                                                    <constraint firstAttribute="width" secondItem="85O-yf-9y0" secondAttribute="height" multiplier="1:1" id="pVO-7H-K2H"/>
                                                 </constraints>
                                             </imageView>
                                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gamecontroller" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="OUv-4z-cOR">
@@ -336,13 +335,10 @@
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="OUv-4z-cOR" secondAttribute="height" multiplier="1:1" id="MLS-pN-wK7"/>
                                                     <constraint firstAttribute="width" constant="30" id="Tkp-5c-xqe"/>
+                                                    <constraint firstAttribute="width" secondItem="OUv-4z-cOR" secondAttribute="height" multiplier="1:1" id="z1V-aR-i8T"/>
                                                 </constraints>
                                             </imageView>
                                         </subviews>
-                                        <constraints>
-                                            <constraint firstItem="85O-yf-9y0" firstAttribute="width" secondItem="85O-yf-9y0" secondAttribute="height" multiplier="1:1" id="pVO-7H-K2H"/>
-                                            <constraint firstItem="OUv-4z-cOR" firstAttribute="width" secondItem="OUv-4z-cOR" secondAttribute="height" multiplier="1:1" id="z1V-aR-i8T"/>
-                                        </constraints>
                                     </stackView>
                                 </subviews>
                             </stackView>
@@ -369,7 +365,7 @@
                     <connections>
                         <outlet property="addToWishListButton" destination="WbQ-X5-IGj" id="BjS-xv-H8P"/>
                         <outlet property="discount" destination="epv-os-rgu" id="myb-sH-Uxv"/>
-                        <outlet property="finalprice" destination="ejP-tB-gC0" id="TVO-lf-0BO"/>
+                        <outlet property="finalprice" destination="ejP-tB-gC0" id="BIS-ae-rek"/>
                         <outlet property="gameControllerImage" destination="OUv-4z-cOR" id="mwZ-Ab-feA"/>
                         <outlet property="gameImage" destination="XaJ-uY-7xV" id="HA6-7p-cmB"/>
                         <outlet property="gameName" destination="NMc-H1-DGM" id="baw-Z0-lib"/>
@@ -396,7 +392,7 @@
         <image name="star" catalog="system" width="128" height="116"/>
         <image name="windows" width="400" height="400"/>
         <namedColor name="backgroundColor">
-            <color red="0.086274509803921567" green="0.11764705882352941" blue="0.19215686274509802" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.086000002920627594" green="0.11800000071525574" blue="0.19200000166893005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
