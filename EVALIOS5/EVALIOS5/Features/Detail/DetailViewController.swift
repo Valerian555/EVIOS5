@@ -20,7 +20,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var finalprice: UILabel!
     @IBOutlet weak var discount: UILabel!
     @IBOutlet weak var gameControllerImage: UIImageView!
-    var game: WindowsGame?
+    var game: Game?
     var isInFavorite = false
     
     //MARK: View Lyfecyle
@@ -36,19 +36,19 @@ class DetailViewController: UIViewController {
 
         
         if let game = game {
-            if game.linux_available! {
+            if game.linuxAvailable! {
                 linuxView.isHidden = false
             } else {
                 linuxView.isHidden = true
             }
             
-            if game.mac_available! {
+            if game.macAvailable! {
                 macView.isHidden = false
             } else {
                 macView.isHidden = true
             }
             
-            if game.windows_available! {
+            if game.windowsAvailable! {
                 windowsView.isHidden = false
             } else {
                 windowsView.isHidden = true
@@ -60,7 +60,7 @@ class DetailViewController: UIViewController {
             windowsView.isHidden = true
         }
         
-        if(game?.controller_support ?? "" == "full") {
+        if(game?.controllerSupport ?? "" == "full") {
             gameControllerImage.isHidden = false
         }
 
@@ -84,21 +84,25 @@ class DetailViewController: UIViewController {
     
     func setupView() {
         gameName.text = game?.name
-        gameImage.loadImage(url: game?.large_capsule_image ?? "")
+        gameImage.loadImage(url: game?.largeImage ?? "")
         
         if(game?.discounted ?? false) {
-            finalprice.text = game?.final_price?.formatCentsToEuros()
-            discount.text = game?.discount_percent?.formatDiscount()
+            finalprice.text = game?.finalPrice?.formatCentsToEuros()
+            discount.text = game?.discountPercent?.formatDiscount()
             let attributedText = NSAttributedString(
-                string: game?.original_price?.formatCentsToEuros() ?? "",
+                string: game?.originalPrice?.formatCentsToEuros() ?? "",
                 attributes: [NSAttributedString.Key.strikethroughStyle: NSUnderlineStyle.single.rawValue]
             )
             
             originalPrice.attributedText = attributedText
         } else {
-            finalprice.text = game?.original_price?.formatCentsToEuros()
+            finalprice.text = game?.originalPrice?.formatCentsToEuros()
             discount.isHidden = true
             originalPrice.isHidden = true
+        }
+        
+        if(game?.finalPrice == 0) {
+            finalprice.text = "Free"
         }
         
     }

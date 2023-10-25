@@ -11,8 +11,10 @@ import Alamofire
 class StoreViewController: UIViewController {
     
     @IBOutlet weak var storeCollectionView: UICollectionView!
-    var games = [WindowsGame]()
-    
+    var linuxGames = [Game]()
+    var windowsGames = [Game]()
+    var macGames = [Game]()
+    var allGames = [Game]()
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Store"
@@ -33,7 +35,7 @@ class StoreViewController: UIViewController {
         // Calcul de la largeur des cellules en prenant en compte l'espace entre les cellules
         let itemWidth = (storeCollectionView.frame.size.width - (numberOfColumns - 1) * interitemSpacing) / numberOfColumns
 
-        layout.itemSize = CGSize(width: itemWidth, height: itemWidth / 1.5)
+        layout.itemSize = CGSize(width: itemWidth, height: itemWidth)
 
         layout.minimumInteritemSpacing = interitemSpacing // Espace horizontal entre les cellules
         layout.minimumLineSpacing = 1 // Espace vertical entre les cellules
@@ -53,7 +55,18 @@ class StoreViewController: UIViewController {
                 
                 do {
                     let gameResponse = try decoder.decode(GameResponse.self, from: data)
-                    self.games = gameResponse.featured_win
+                    self.linuxGames = gameResponse.featuredLinux
+                    self.windowsGames = gameResponse.featuredWin
+                    self.macGames = gameResponse.featuredMac
+                    
+                    for gameList in [self.windowsGames, self.linuxGames, self.macGames] {
+                        for game in gameList {
+                            if !self.allGames.contains(where: { $0.id == game.id }) {
+                                self.allGames.append(game)
+                            }
+                        }
+                    }
+
                     self.storeCollectionView.reloadData()
                 } catch {
                     print("Error, can't parse JSON.")
@@ -67,14 +80,14 @@ class StoreViewController: UIViewController {
 
 extension StoreViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        games.count
+        allGames.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let customCell = collectionView.dequeueReusableCell(withReuseIdentifier:
                                                                 "StoreCollectionViewCell", for: indexPath) as! StoreCollectionViewCell
         
-        customCell.setup(game: games[indexPath.row])
+        customCell.setup(game: allGames[indexPath.row])
         
         return customCell
     }
@@ -82,7 +95,7 @@ extension StoreViewController: UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailViewController = storyboard?.instantiateViewController(identifier: "DetailViewController") as! DetailViewController
         
-        detailViewController.game = games[indexPath.row]
+        detailViewController.game = allGames[indexPath.row]
         
         navigationController?.pushViewController(detailViewController, animated: true)
     }

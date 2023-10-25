@@ -18,26 +18,30 @@ class StoreCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
     }
     
-    func setup(game: WindowsGame) {
+    func setup(game: Game) {
         if(game.discounted!) {
             gameName.text = game.name
-            gameImage.loadImage(url: game.small_capsule_image ?? "")
-            gameDiscount.text = game.discount_percent?.formatDiscount()
+            gameImage.loadImage(url: game.smallImage ?? "")
+            gameDiscount.text = game.discountPercent?.formatDiscount()
             let attributedText = NSAttributedString(
-                string: game.original_price?.formatCentsToEuros() ?? "",
+                string: game.originalPrice?.formatCentsToEuros() ?? "",
                 attributes: [NSAttributedString.Key.strikethroughStyle: NSUnderlineStyle.single.rawValue]
             )
             
             gameOriginalPrice.attributedText = attributedText
-            gameOriginalPrice.text = game.original_price?.formatCentsToEuros()
-            gameFinalPrice.text = game.final_price?.formatCentsToEuros()
+            gameOriginalPrice.text = game.originalPrice?.formatCentsToEuros()
+            gameFinalPrice.text = game.finalPrice?.formatCentsToEuros()
         } else {
             gameDiscount.isHidden = true
             gameOriginalPrice.isHidden = true
             
             gameName.text = game.name
-            gameImage.loadImage(url: game.small_capsule_image ?? "")
-            gameFinalPrice.text = game.final_price?.formatCentsToEuros()
+            gameImage.loadImage(url: game.smallImage ?? "")
+            gameFinalPrice.text = game.finalPrice?.formatCentsToEuros()
+        }
+        
+        if(game.finalPrice == 0) {
+            gameFinalPrice.text = "Free"
         }
     }
 }
